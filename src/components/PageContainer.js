@@ -14,4 +14,4 @@ const PageContainer = () => {
 
 }
 
-export default Footer
+export default PageContainer
