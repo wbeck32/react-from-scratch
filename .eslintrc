@@ -1,8 +1,4 @@
 {
-  "libraryInfo": {
-    "description": "ESLint Reset - A starter .eslintrc file that resets all rules to off and includes a description of what each rule does. From here, enable the rules that you care about by changing the 0 to a 1 or 2. 1 means warning (will not affect exit code) and 2 means error (will affect exit code).",
-    "url": "http://eslint.org/docs/rules/"
-  },
   "ecmaFeatures": {
     "binaryLiterals": false, // enable binary literals  http://eslint.org/docs/rules/
     "blockBindings": false, // enable let and const (aka block bindings)
