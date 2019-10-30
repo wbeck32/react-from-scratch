@@ -1,10 +1,18 @@
-import React, { Component } from "react";
+import React, { Fragment, Component } from "react";
 import { hot } from 'react-hot-loader'
 import "./App.css"
-import PageContainer from './components/PageContainer'
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+
+
+import MaterialUI from './components/MaterialUI'
 class App extends Component {
 	render() {
-		return (<PageContainer />);
+		return (
+			<Fragment>
+				<CssBaseline />
+				<MaterialUI />
+			</Fragment>);
 	}
 }
 
