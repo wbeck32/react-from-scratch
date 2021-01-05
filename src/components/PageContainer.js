@@ -8,9 +8,9 @@ const PageContainer = () => {
 		height: '.25vh',
 		border: '2px solid pink'
 	}
-	return (<div style={pageContainerStyle}><Header /><Main /><Footer /></div>)
-
-
+	return (
+	<div style={pageContainerStyle}><Header /><Main /><Footer /></div>
+	)
 
 }
 
