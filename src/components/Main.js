@@ -1,37 +1,36 @@
 import React from 'react';
-import { Card,Paper } from '@material-ui/core';
+import { Card, CardHeader, CardContent } from '@material-ui/core';
 
 
-const Main = () => {
-	const mainStyle = {
-		height: '.25vh',
-		border: '2px solid orange'
-	}
+const Main = props => {
+	console.log('props in main: ', props);
 	return (
-	
-		<Paper
-  container
-  direction="column"
-  justify="space-evenly"
-  alignItems="stretch"
-children={
-<>
-<section>section 1</section>
-<section>section 2</section>
-</>
+		<>
+			<Card>
+				<CardHeader>
+					Qualifications Summary
+				</CardHeader>
+				<CardContent>
+					<p>I&apos;m a front-end developer - ​React17&comma; Redux​&comma; ​Node.js​&comma; ​JavaScript​&comma; and ​Express​&comma; with extensive experience writing and using ​RESTful APIs​. I love ​React hooks​&comma;​ ES6​&comma; a​ ll kinds of testing frameworks​&comma; ​hackathons​&comma; and the ​command line.​ I have a previous ​15 years experience​ ​in responsive web development​ with ​HTML5​&comma; ​CSS3​&comma; ​SCSS​&comma; and ​AJAX​.
+					</p>
+					<p>					As a team member&comma; I’m a diligent problem solver who troubleshoots&comma; analyzes solutions&comma; and implements changes and writes documentation. I’m an approachable communicator who is able to explain coding solutions in non-technical terms.
+</p>
+				</CardContent>
 
 
-}
+			</Card>
 
-/>
-
-
+		</>
 
 
-	
-	
-	
-	
+
+
+
+
+
+
+
+
 	)
 
 
