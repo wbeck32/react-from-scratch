@@ -5,7 +5,8 @@
         "node": true
     },
     "extends": [
-        "eslint:recommended",
+				"eslint:recommended",
+				"plugin:jsx-a11y/recommended",
         "plugin:react/recommended"
     ],
     "globals": {
@@ -20,6 +21,7 @@
         "sourceType": "module"
     },
     "plugins": [
+			"jsx-a11y",
         "react"
     ],
     "rules": {

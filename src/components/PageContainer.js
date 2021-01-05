@@ -1,16 +1,16 @@
-import React from 'react';
+import Footer from './Footer'
 import Header from './Header'
 import Main from './Main'
-import Footer from './Footer'
+import React from 'react';
 
 const PageContainer = props => {
 	console.log('props: ', props);
-	const pageContainerStyle = {
-		height: '.25vh',
-		border: '2px solid pink'
-	}
 	return (
-		<div style={pageContainerStyle}><Header /><Main /><Footer /></div>
+		<>
+		<Header />
+		<Main />
+		<Footer />
+		</>
 	)
 
 }
