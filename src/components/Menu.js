@@ -4,7 +4,7 @@ import {
 	Switch,
 	Route,
 	NavLink
-  } from "react-router-dom";
+} from "react-router-dom";
 import Main from './Main'
 import Storybook from './Storybook'
 import Lighthouse from './Lighthouse'
@@ -14,37 +14,38 @@ import {Breadcrumbs} from '@material-ui/core'
 
 
 const Menu = props => {
-	  console.log('props in menu:', props);
-return (
-
-<Router>
-<Breadcrumbs aria-label="breadcrumb">
+	console.log('props in menu:', props);
+	return (
+		<header>
+		<Router>
+		<Breadcrumbs aria-label="breadcrumb">
 		<nav>
 		<ul>
-		<li>
+		<li  key={Math.random().toFixed(5)}>
 		<NavLink to="/">Home</NavLink>
 		</li>
-		<li>
+		<li key={Math.random().toFixed(5)}>
 		<NavLink to="/storybook">Storybook</NavLink>
 		</li>
-		<li>
+		<li key={Math.random().toFixed(5)}>
 		<NavLink to="/lighthouse">Lighthouse report</NavLink>
 		</li>
-		<li>
+		<li key={Math.random().toFixed(5)}>
 		<NavLink to="/resources">Resources</NavLink>
 		</li>
 		</ul>
 		</nav>
-</Breadcrumbs>
+		</Breadcrumbs>
 		<Switch>
-          <Route exact path="/" component={Main}/>
-          <Route path="/storybook" component={Storybook}/>
-          <Route path="/lighthouse" component={Lighthouse}/>
-		  <Route path="/resources" component={Resources}/>
-
-        </Switch>
+		<Route  key={Math.random().toFixed(5)} exact path="/" component={Main}/>
+		<Route key={Math.random().toFixed(5)} path="/storybook" component={Storybook}/>
+		<Route key={Math.random().toFixed(5)} path="/lighthouse" component={Lighthouse}/>
+		<Route key={Math.random().toFixed(5)} path="/resources" component={Resources}/>
+		
+		</Switch>
 		</Router>
-	)
-}
-
-export default Menu
+		</header>
+		)
+	}
+	
+	export default Menu

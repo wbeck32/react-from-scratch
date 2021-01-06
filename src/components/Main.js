@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {
 	Accordion,
 	AccordionSummary,
@@ -11,20 +11,15 @@ import {
 } from '@material-ui/core';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import dataArray from '../static/dataArray'
+import Footer from './Footer'
 
 const Main = props => {
-	const [expanded,setExpanded] = useState(false)
 	console.log('props in main: ', props);
-	
-	const handleAccordionChange = (e,open)=>{
-		console.log('e,open:', e,open);
-	}
-	
 	
 	const jobs = dataArray.map(d=>{
 		return(	
 			<>
-			<Accordion onChange={handleAccordionChange}>
+			<Accordion key={Math.random().toFixed(5)}>
 			<AccordionSummary id={d.summaryId} aria-controls={d.summaryAriaControls} expandIcon={
 				<IconButton aria-label="expand">
 				<SvgIcon>
@@ -37,7 +32,7 @@ const Main = props => {
 			<AccordionDetails>
 			<ul>
 			{d.description.map(q=>{
-				return <li>{q}</li>		
+				return <li key={Math.random().toFixed(5)}>{q}</li>		
 			})}
 			</ul>
 			</AccordionDetails>
@@ -50,10 +45,11 @@ const Main = props => {
 		
 		return ( 
 			<>
+			<h1>Resume</h1>
 			<Card>
 			<>
 			<h2>Wendy Beck</h2>
-			<h3>Portland, OR 97210 | webeck@gmail.com | 415-786-2948</h3>
+			<h3 >Portland, OR 97210 | webeck@gmail.com | 415-786-2948</h3>
 			<h3>linkedin.com/in/wendybeck​ | ​github.com/wbeck32</h3>
 			<h3>Senior Web Developer • React/Redux Developer • Front-end Developer</h3>
 			</>
@@ -77,10 +73,7 @@ const Main = props => {
 			<tbody>
 			<tr><th>React/Redux</th><th>RESTful APIs</th><th>Node.js</th><th>ES6</th></tr>
 			<tr><th>Anaytics platforms</th><th>TDD Testing</th><th>SCSS</th><th>Mocha, Chai, Sinon</th></tr>
-			
-			
 			</tbody>
-			
 			</table>
 			
 			</CardContent>
@@ -88,12 +81,9 @@ const Main = props => {
 			<Paper elevation={1}>
 			{jobs}
 			</Paper>
+			<Footer/>
 			</>
-			
 			)
-			
-			
-			
 		}
 		
 		export default Main
