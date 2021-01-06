@@ -1,4 +1,5 @@
 import "./App.css"
+import { hot } from 'react-hot-loader'
 
 import {
 	Link,
@@ -9,7 +10,6 @@ import {
 
 import PageContainer from './components/PageContainer'
 import React from "react";
-import { hot } from 'react-hot-loader'
 
 const App =props=> {
 	console.log('props in App.js:', props);
