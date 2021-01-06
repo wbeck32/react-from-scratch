@@ -4,29 +4,24 @@ import {
 	CardHeader,
 	Paper
 } from '@material-ui/core';
-
+import Header from './Header'
+import Footer from './Footer'
 import React from 'react';
 import data from '../static/data'
 
 const Main = props => {
-	const professionalExp = data.map(i=>{
-		
-		<Card>
-		<CardHeader 
-		title={i.id}
-		variant="outlined"
-		/>
-		<CardContent>
-		{i.date}
-		</CardContent>
-		
-		</Card>
-		
-		
-	})
+
 	console.log('props in main: ', props);
 	return ( 
 		<>
+		<Card>
+			<>
+				<h2>Wendy Beck</h2>
+				<h3>Portland, OR 97210 | webeck@gmail.com | 415-786-2948</h3>
+				<h3>linkedin.com/in/wendybeck​ | ​github.com/wbeck32</h3>
+				<h3>Senior Web Developer • React/Redux Developer • Front-end Developer</h3>
+			</>
+		</Card>
 		<Card>
 		<CardHeader>
 		Qualifications Summary 
@@ -56,24 +51,10 @@ const Main = props => {
 		
 		</CardContent>
 		</Card>
-		<Paper elevation={1}>
+		<Paper elevation={1}/>
 
 		
-		{data.map(i=>{
-		
-		<Card>
-		<CardHeader 
-		title={i.id}
-		variant="outlined"
-		/>
-		
-		</Card>
-		})
-	}
 
-	</Paper>
-		
-		
 		</>
 		
 		)

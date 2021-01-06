@@ -1,54 +1,16 @@
 import "./App.css"
 import { hot } from 'react-hot-loader'
-
-import {
-	Link,
-	Route,
-	BrowserRouter as Router,
-	Switch
-} from "react-router-dom";
-
-import PageContainer from './components/PageContainer'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import React from "react";
+import PageContainer from './components/PageContainer'
 
 const App =props=> {
 	console.log('props in App.js:', props);
 	return (
-		<PageContainer>
-		<Router>
-		<div>
-		<nav>
-		<ul>
-		<li>
-		<Link to="/">Home</Link>
-		</li>
-		<li>
-		<Link to="/storybook">Storybook</Link>
-		</li>
-		<li>
-		<Link to="/lighthouse">Lighthouse report</Link>
-		</li>
-		</ul>
-		</nav>
-		
-		<Switch>
-		<Route path="/storybook">
-		<PageContainer name="storybook" />
-		</Route>
-		<Route path="/lighthouse">
-		<PageContainer name="lighthouse" />
-		</Route>
-		<Route path="/">
-		<PageContainer name="resume" />
-		</Route>
-		</Switch>
-		</div>
-		
-		
-		</Router>
-		
-		</PageContainer>
-		
+		<>
+		<PageContainer/>
+	</>
 		
 		);
 	}

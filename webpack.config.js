@@ -42,7 +42,6 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
-		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			title: 'Development',
 		}),
