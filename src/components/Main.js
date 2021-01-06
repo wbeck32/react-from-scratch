@@ -2,7 +2,10 @@ import {
 	Card,
 	CardContent,
 	CardHeader,
-	Paper
+	Paper,
+	Accordion,
+	AccordionSummary,
+	AccordionDetails
 } from '@material-ui/core';
 import Header from './Header'
 import Footer from './Footer'
@@ -52,7 +55,17 @@ const Main = props => {
 		</CardContent>
 		</Card>
 		<Paper elevation={1}/>
-
+<Accordion>
+<AccordionSummary>
+CDK Global​ | ​Senior React Developer​ | 09/2020 – 01/2021 | Portland, OR
+</AccordionSummary>
+<AccordionDetails>
+Used the newest internal React component library, based on styled-components, to build shared components for the Fortellis Payment Component.
+➔ Refactored code in the Fortellis Component to update modules, simplify the code, and implement the new shared component library.
+➔ Updated test cases and increasing test coverage for the Fortellis Component, using React Testing Library, Jest, and Axios.
+➔ Updated Storybook to the latest version and add-ons to use it as an effective UI development tool and testing framework.
+</AccordionDetails>
+</Accordion>
 		
 
 		</>

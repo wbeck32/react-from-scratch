@@ -8,6 +8,7 @@ import {
 import Main from './Main'
 import Storybook from './Storybook'
 import Lighthouse from './Lighthouse'
+import {Breadcrumbs} from '@material-ui/core'
 
 
 
@@ -16,7 +17,7 @@ const Menu = props => {
 return (
 
 <Router>
-	<div>
+<Breadcrumbs aria-label="breadcrumb">
 		<nav>
 		<ul>
 		<li>
@@ -30,8 +31,7 @@ return (
 		</li>
 		</ul>
 		</nav>
-		</div>
-
+</Breadcrumbs>
 		<Switch>
           <Route exact path="/" component={Main}/>
           <Route path="/storybook" component={Storybook}/>
