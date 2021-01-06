@@ -5,7 +5,7 @@ import {
 	Route,
 	NavLink
 } from "react-router-dom";
-import Main from './Main'
+import Resume from './Resume'
 import Storybook from './Storybook'
 import Lighthouse from './Lighthouse'
 import Resources from './Resources'
@@ -37,7 +37,7 @@ const Menu = props => {
 		</nav>
 		</Breadcrumbs>
 		<Switch>
-		<Route  key={Math.random().toFixed(5)} exact path="/" component={Main}/>
+		<Route  key={Math.random().toFixed(5)} exact path="/" component={Resume}/>
 		<Route key={Math.random().toFixed(5)} path="/storybook" component={Storybook}/>
 		<Route key={Math.random().toFixed(5)} path="/lighthouse" component={Lighthouse}/>
 		<Route key={Math.random().toFixed(5)} path="/resources" component={Resources}/>

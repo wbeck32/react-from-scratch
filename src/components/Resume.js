@@ -13,7 +13,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import dataArray from '../static/dataArray'
 import Footer from './Footer'
 
-const Main = props => {
+const Resume = props => {
 	console.log('props in main: ', props);
 	
 	const jobs = dataArray.map(d=>{
@@ -68,11 +68,21 @@ const Main = props => {
 			<table>
 			<caption>Skills Summary</caption>
 			<thead>
-			<tr><th>Languages</th><th>Testing Frameworks</th><th>API</th><th>UI</th></tr>
+			<tr><th>Languages</th><th>Testing Frameworks</th><th>APIs</th><th>UI</th></tr>
 			</thead>
 			<tbody>
-			<tr><th>React/Redux</th><th>RESTful APIs</th><th>Node.js</th><th>ES6</th></tr>
-			<tr><th>Anaytics platforms</th><th>TDD Testing</th><th>SCSS</th><th>Mocha, Chai, Sinon</th></tr>
+			<tr>
+			<th>React/Redux</th>
+			<th>RESTful APIs</th>
+			<th>Node.js</th>
+			<th>ES6</th>
+			</tr>
+			<tr>
+			<th>Anaytics platforms</th>
+			<th>TDD Testing</th>
+			<th>SCSS</th>
+			<th>Mocha, Chai, Sinon</th>
+			</tr>
 			</tbody>
 			</table>
 			
@@ -86,4 +96,4 @@ const Main = props => {
 			)
 		}
 		
-		export default Main
+		export default Resume
