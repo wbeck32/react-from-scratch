@@ -1,3 +1,32 @@
-.App {
-	border: 2px solid red;
+@import '~normalize.css/normalize.css';
+
+
+@font-face {
+	font-family: 'Exo 2',sans-serif;
+}
+
+
+body{
+padding:6%;
+
+
+}
+
+h1 {
+font-size:2em;
+text-align: center;
+
+
+}
+
+h2 {
+font-size: 1em;
+text-align: center;
+
+}
+
+h3 {
+
+	font-size: .75em;
+	text-align: center;
 }

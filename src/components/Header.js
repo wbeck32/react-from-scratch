@@ -27,12 +27,13 @@ const Header = props => {
 	const handleChange = event => {
 		// set icon in style
 		setDarkTheme(event.target.checked)
+		darkTheme === true ? setThemeStyle({border:"2px solid red"}):setThemeStyle({border:"2px solid green"})
 		// setThemeStyle({themeStyle:{border:"2px solid red"}}?{border:"2px solid green"}:{border:"2px solid red"})
 	};
 	
 	
 	return (
-		<>
+		<header>
 		<FormControlLabel
 		value="label"
 		control={<Switch
@@ -48,7 +49,7 @@ const Header = props => {
 			
 			/>
 			<Menu />
-			</>
+			</header>
 			);
 		};
 		

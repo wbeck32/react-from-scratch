@@ -16,7 +16,6 @@ import {Breadcrumbs} from '@material-ui/core'
 const Menu = props => {
 	console.log('props in menu:', props);
 	return (
-		<header>
 		<Router>
 		<Breadcrumbs aria-label="breadcrumb">
 		<nav>
@@ -44,7 +43,6 @@ const Menu = props => {
 		
 		</Switch>
 		</Router>
-		</header>
 		)
 	}
 	

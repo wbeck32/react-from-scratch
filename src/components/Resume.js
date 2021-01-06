@@ -12,10 +12,14 @@ import {
 import SvgIcon from '@material-ui/core/SvgIcon';
 import dataArray from '../static/dataArray'
 import Footer from './Footer'
+import { useTheme } from '@material-ui/core/styles';
+
+
+
 
 const Resume = props => {
 	console.log('props in main: ', props);
-	
+	const theme = useTheme()
 	const jobs = dataArray.map(d=>{
 		return(	
 			<>
@@ -45,7 +49,7 @@ const Resume = props => {
 		
 		return ( 
 			<>
-			<h1>Resume</h1>
+			<h1 style={{color:theme.palette.primary}} >Resume</h1>
 			<Card>
 			<>
 			<h2>Wendy Beck</h2>
