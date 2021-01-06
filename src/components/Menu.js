@@ -11,10 +11,8 @@ import Lighthouse from './Lighthouse'
 
 
 
-  const Menu = props => {
+const Menu = props => {
 	  console.log('props in menu:', props);
-
-
 return (
 
 <Router>
@@ -39,12 +37,8 @@ return (
           <Route path="/storybook" component={Storybook}/>
           <Route path="/lighthouse" component={Lighthouse}/>
         </Switch>
-
 		</Router>
+	)
+}
 
-)
-
-
-  }
-
-  export default Menu
+export default Menu

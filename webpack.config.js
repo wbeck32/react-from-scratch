@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // TODO: for prod:
 // - no HMR
 // https://webpack.js.org/guides/production/
-// add scss loader
+// add scss
 
 module.exports = {
 	entry: ['react-hot-loader/patch','./src/index.js'],
@@ -32,7 +32,6 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist/'),
-		publicPath: '/dist/',
 		filename: 'bundle.js'
 	},
 	devServer: {
@@ -42,6 +41,7 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
+		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			title: 'Development',
 		}),

@@ -1,18 +1,12 @@
 import React from 'react';
-import Menu from './Menu'
+import Menu from './Menu';
 
 
 const Header = props => {
 	console.log('props in header:', props);
-		return (
-			<>
-	<Menu/>
-		
-		</>
-	)
+	return (
+		<Menu />
+	);
+};
 
-
-
-}
-
-export default Header
+export default Header;

@@ -1,7 +1,5 @@
-import Footer from './Footer';
-import Header from './Header';
-import Main from './Main';
 import React from 'react';
+import Header from './Header';
 
 
 const PageContainer = props => {
@@ -11,7 +9,6 @@ const PageContainer = props => {
 		<Header/>
 		</div>
 		);
-		
 	};
 	
 	export default PageContainer;
