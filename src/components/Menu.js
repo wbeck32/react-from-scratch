@@ -8,6 +8,7 @@ import {
 import Main from './Main'
 import Storybook from './Storybook'
 import Lighthouse from './Lighthouse'
+import Resources from './Resources'
 import {Breadcrumbs} from '@material-ui/core'
 
 
@@ -29,6 +30,9 @@ return (
 		<li>
 		<NavLink to="/lighthouse">Lighthouse report</NavLink>
 		</li>
+		<li>
+		<NavLink to="/resources">Resources</NavLink>
+		</li>
 		</ul>
 		</nav>
 </Breadcrumbs>
@@ -36,6 +40,8 @@ return (
           <Route exact path="/" component={Main}/>
           <Route path="/storybook" component={Storybook}/>
           <Route path="/lighthouse" component={Lighthouse}/>
+		  <Route path="/resources" component={Resources}/>
+
         </Switch>
 		</Router>
 	)
