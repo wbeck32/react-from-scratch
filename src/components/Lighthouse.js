@@ -1,14 +1,10 @@
-import React from 'react'
-import Footer from './Footer'
-
+import React from "react";
 
 
 const Lighthouse = props => {
-	console.log('props in LH:', props);
+	console.log("props in LH:", props);
 
 	return <h1>lighthouse</h1>
+};
 
-
-}
-
-export default Lighthouse
+export default Lighthouse;
