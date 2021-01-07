@@ -1,5 +1,7 @@
+/* eslint-disable sort-keys */
 const path = require('path');
 const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -9,41 +11,50 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // add scss
 
 module.exports = {
-	entry: ['react-hot-loader/patch','./src/index.js'],
-	mode: 'development',
-	module: {
-		rules: [
-			{
-				test: /\.(js|jsx)$/,
-				exclude: /(node_modules|bower_components)/,
-				loader: 'babel-loader',
-				options: {
-					presets: ['@babel/env']
+	mode : 'development',
+	entry : [ 'react-hot-loader/patch', './src/index.js' ],
+	output : {
+		path : path.resolve(__dirname, 'dist'),
+		filename : './bundle.js'
+	},
+	module : {
+		rules : [ {
+			test : /\.(js|jsx)$/,
+			exclude : /node_modules/,
+			use : 'babel-loader'
+		}, {
+			test : /\.css$/,
+			use : [ 'style-loader', 'css-loader' ]
+		}, {
+			test : /\.svg$/,
+			use : 'file-loader'
+		}, {
+			test : /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+			use : [ {
+				loader : 'file-loader',
+				options : {
+					name : '[name].[ext]',
+					outputPath : '.'
 				}
-			},
-			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
-			}
-		]
+			} ]
+		} ]	
 	},
-	resolve: {
-		extensions: ['*', '.js', '.jsx']
+	stats : { 
+		logging : true
 	},
-	output: {
-		path: path.resolve(__dirname, 'dist/'),
-		filename: 'bundle.js'
+	resolve : {
+		extensions : [ '*', '.js', '.jsx' ],
+		alias : {
+			'react-dom' : '@hot-loader/react-dom'
+		}
 	},
-	devServer: {
-		contentBase: path.join(__dirname, 'public/'),
-		port: 3000,
-		publicPath: 'http://localhost:3000/dist/',
+	devServer : {
+		contentBase : path.join(__dirname, './dist')
 	},
-	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
-		new CleanWebpackPlugin(),
-		new HtmlWebpackPlugin({
-			title: 'Development',
-		}),
-	],
+	plugins : [ new CopyPlugin({
+		patterns : [ { from : 'src' } ]
+	}), new HtmlWebpackPlugin({
+		title : 'Development',
+		template : 'public/index.html'
+	}) ]
 };
