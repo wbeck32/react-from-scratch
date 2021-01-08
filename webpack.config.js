@@ -15,7 +15,7 @@ module.exports = {
 	entry : [ 'react-hot-loader/patch', './src/index.js' ],
 	output : {
 		path : path.resolve(__dirname, 'dist'),
-		filename : './bundle.js'
+		filename : 'bundle.js'
 	},
 	module : {
 		rules : [ {
@@ -49,12 +49,10 @@ module.exports = {
 		}
 	},
 	devServer : {
-		contentBase : path.join(__dirname, './dist')
+		contentBase : path.join(__dirname, 'dist')
 	},
-	plugins : [ new CopyPlugin({
-		patterns : [ { from : 'src' } ]
-	}), new HtmlWebpackPlugin({
+	plugins : [ new HtmlWebpackPlugin({
 		title : 'Development',
-		template : 'public/index.html'
+		template : 'src/index.html'
 	}) ]
 };
