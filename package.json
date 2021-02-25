@@ -23,9 +23,9 @@
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
     "@storybook/addon-actions": "^6.1.11",
-    "@storybook/addon-essentials": "^6.1.11",
+    "@storybook/addon-essentials": "^6.1.20",
     "@storybook/addon-links": "^6.1.11",
-    "@storybook/react": "^6.1.11",
+    "@storybook/react": "^6.1.20",
     "babel-loader": "^8.2.2",
     "css-loader": "^1.0.0",
     "react-hot-loader": "^4.13.0",
@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
+    "@material-ui/core": "^4.11.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   }
