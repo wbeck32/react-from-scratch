@@ -15,10 +15,7 @@ const Resources = props => {
 W3.org
 				</li>
 				<li>
-MDN
-					<a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles" rel="external" target="_blank">text</a>
-
-
+					<a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles" rel="external" target="_blank">MDN - Accessibility - ARIA - Roles</a>
 				</li>
 
 
@@ -26,8 +23,18 @@ MDN
 			<h2>Browser Tools</h2>
 			<ul>
 				<li>
-
+					<a href="https://developers.google.com/web/fundamentals/accessibility" rel="external" target="_blank">Google - Design and User Experience - Accessibility</a>
 	
+				</li>
+				<li>WAVE</li>
+
+
+			</ul>
+			<h2>MacOS</h2>
+			<ul>
+				<li>
+					<a href="https://developer.apple.com/documentation/appkit/accessibility_for_macos/integrating_accessibility_into_your_app">Integrating Accessibility Into Your App</a>
+					<p><a href="https://www.example.com">Example</a></p>
 				</li>
 
 
