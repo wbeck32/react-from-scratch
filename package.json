@@ -4,7 +4,7 @@
   "description": "Learning React without cra-cra.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
+    "start": "webpack serve --mode development",
     "build": "webpack --mode development",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
@@ -31,9 +31,9 @@
     "react-hot-loader": "^4.13.0",
     "storybook": "^6.1.11",
     "style-loader": "^0.23.0",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.1"
+    "webpack": "^5.24.2",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",

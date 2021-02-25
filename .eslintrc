@@ -1,3 +1,26 @@
+{
+	"parserOptions": {
+			"ecmaVersion": 12,
+			"sourceType": "module",
+			"ecmaFeatures": {
+					"jsx": true
+			}
+	},
+	"parser": "esprima",
+	"rules": {},
+	"env": {
+			"browser": true,
+			"node": true,
+			"jest": true,
+			"serviceworker": false,
+			"es2021": true,
+			"es6": true,
+			"es2017": true,
+			"es2020": true
+	}
+}
+
+
 // {
 //   "ecmaFeatures": {
 //     "binaryLiterals": false, // enable binary literals  http://eslint.org/docs/rules/
