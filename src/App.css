@@ -1,7 +1,10 @@
 div {
 	height:40px;
 }
-
+li::marker {
+	text-decoration-style: none;
+	content:none;
+}
 .gist {
 	border:2px solid red;
 }
