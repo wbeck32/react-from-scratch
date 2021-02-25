@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 
 
 const GistList = props => {
@@ -6,7 +6,7 @@ const GistList = props => {
 
 	return ((gists.message !=="Not Found" &&
 		gists.map(g=>{
-		return	<li><div onClick={e=>onClick(g)} className="gist">{g.description}</div></li>		
+		return	<li key={g.id} onClick={e=>onClick(g)} className="gist">{g.description}</li>		
 			})
 			))
 		}
