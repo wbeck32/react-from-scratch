@@ -1,3 +1,12 @@
 div {
-	height:400px;
-	}
+	height:40px;
+}
+
+.gist {
+	border:2px solid red;
+}
+
+.gistDetail {
+border:2px solid blue;
+
+}

@@ -23,8 +23,6 @@ const App = ()=> {
 			setGists(gistsArray)
   }
 
-
-
 		return (
 			<div>
 			<Header onSearch={handleSearch}/>
