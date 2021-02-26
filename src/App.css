@@ -1,15 +1,29 @@
-div {
-	height:40px;
+@font-face {
+	font-family: 'neuehanskendrick-regular';
+	src:url('../public/fonts/neuehanskendrick-regular.woff') format('woff');
+	src:url('../public/fonts/neuehanskendrick-regular.woff2') format('woff2');
 }
+
+@font-face {
+	font-family: 'neuehanskendrick-light';
+	src:url('../public/fonts/neuehanskendrick-light.woff') format('woff');
+	src:url('../public/fonts/neuehanskendrick-light.woff2') format('woff2');
+}
+
+body {
+	font-family: 'neuehanskendrick-regular';
+}
+
 li::marker {
 	text-decoration-style: none;
 	content:none;
 }
 .gist {
-	border:2px solid red;
+margin:10px 0;
 }
 
 .gistDetail {
-border:2px solid blue;
+	font-family:'neuehanskendrick-light';
+	width:65vw
 
 }

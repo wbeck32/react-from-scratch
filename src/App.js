@@ -29,7 +29,6 @@ const App = () => {
 	}
 	
 	const handleView = async e =>{
-		console.log('e:', e);
 		if (e==='public') {
 			return await publicGists()
 		} 

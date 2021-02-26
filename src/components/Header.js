@@ -5,7 +5,13 @@ const Header = props => {
 
 	return (
 		<>
-		<div><span onClick={e=>{onClick('home')}}>home</span> || <span onClick={e=>{onClick('public')}}>public gists</span> || <span onClick={e=>{onClick('add')}}>add a gist</span></div>
+		<nav>
+		<ol>
+		<li onClick={e=>{onClick('home')}}>home</li> || 
+		<li onClick={e=>{onClick('public')}}>public gists</li> || 
+		<li onClick={e=>{onClick('add')}}>add a gist</li>
+		</ol>
+		</nav>
 	  <div>
       <input placeholder="search for a user" name="searchInput" onChange={onSearch}/>
     </div>

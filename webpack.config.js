@@ -6,6 +6,10 @@ module.exports = {
   mode : 'development',
   module : {
     rules : [
+			{
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
       {
         test : /\.(js|jsx)$/,
         exclude : /(node_modules|bower_components)/,
