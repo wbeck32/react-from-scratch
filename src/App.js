@@ -13,6 +13,7 @@ const App = () => {
 	const [view,setView] = useState('home')
 	
 	const publicGists = async e => {
+		setGists([])
 		const res = await fetch(`https://api.github.com/gists/public`);
 		let gistsArray = await res.json();
 		setView('list')

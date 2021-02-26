@@ -72,12 +72,8 @@ header {
 .main {
 	border:1px solid red;
 	display:inline-block;
-	width: 75vw;
-	height:100%;
 }
 .sideBar {
-width:20vw;
-height:100vh;
 display: inline-block;
 border:1px solid orange
 

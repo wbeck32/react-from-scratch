@@ -8,7 +8,7 @@ const Main = props => {
 	
 	const [gistText,setGistText] = useState('')
 	
-	const handleSelect= async g =>{
+	const handleSelect= async g => {
 		let gistURL = g.url;
 		const res = await fetch(`${gistURL}`,{})
 		const response = await res.json();
