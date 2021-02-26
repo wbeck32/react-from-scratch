@@ -4,6 +4,7 @@ import "./App.css"
 import Header from './components/Header'
 import Main from './components/Main'
 import Footer from './components/Footer'
+import Sidebar from './components/Sidebar'
 import response from '../response.json'
 
 const App = () => {
@@ -37,11 +38,12 @@ const App = () => {
 	
 	return (
 		<>
-		<div>
 		<Header onClick={handleView} onSearch={handleSearch} />
-		<Main view={view} gists={gists} />
-		<Footer />
+		<div className="flex-container">
+		<Sidebar className="sideBar" onClick={handleView} onSearch={handleSearch}/>
+		<Main className="main" view={view} gists={gists} />
 		</div>
+		<Footer />
 		</>
 		);
 	}

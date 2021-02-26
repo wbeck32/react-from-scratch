@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import GistList from './GistList'
 import GistDetail from './GistDetail'
+import Sidebar from './Sidebar'
 
 const Main = props => {
 	const {gists,view} = props

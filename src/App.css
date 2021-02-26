@@ -10,6 +10,52 @@
 	src:url('../public/fonts/neuehanskendrick-light.woff2') format('woff2');
 }
 
+.flex-container {
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-flex-wrap: nowrap;
+	-ms-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+	-webkit-justify-content: flex-start;
+	-ms-flex-pack: start;
+	justify-content: flex-start;
+	-webkit-align-content: flex-start;
+	-ms-flex-line-pack: start;
+	align-content: flex-start;
+	-webkit-align-items: flex-start;
+	-ms-flex-align: start;
+	align-items: flex-start;
+	}
+
+.flex-item:nth-child(1) {
+	-webkit-order: 0;
+	-ms-flex-order: 0;
+	order: 0;
+	-webkit-flex: 0 1 auto;
+	-ms-flex: 0 1 auto;
+	flex: 0 1 auto;
+	-webkit-align-self: auto;
+	-ms-flex-item-align: auto;
+	align-self: auto;
+	}
+
+.flex-item:nth-child(2) {
+	-webkit-order: 0;
+	-ms-flex-order: 0;
+	order: 0;
+	-webkit-flex: 0 1 auto;
+	-ms-flex: 0 1 auto;
+	flex: 0 1 auto;
+	-webkit-align-self: auto;
+	-ms-flex-item-align: auto;
+	align-self: auto;
+	}
+
+
 body {
 	font-family: 'neuehanskendrick-regular';
 }
@@ -17,6 +63,24 @@ body {
 li::marker {
 	text-decoration-style: none;
 	content:none;
+}
+header {
+	width:100%;
+	background-color: orchid;
+	padding:2%;
+}
+.main {
+	border:1px solid red;
+	display:inline-block;
+	width: 75vw;
+	height:100%;
+}
+.sideBar {
+width:20vw;
+height:100vh;
+display: inline-block;
+border:1px solid orange
+
 }
 .gist {
 margin:10px 0;
