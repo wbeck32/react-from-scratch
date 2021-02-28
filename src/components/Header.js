@@ -1,5 +1,4 @@
 import React from 'react';
-import Authorization from './Authorization'
 
 const Header = props => {
 
