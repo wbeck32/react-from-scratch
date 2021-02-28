@@ -6,8 +6,10 @@
 					"jsx": true
 			}
 	},
-	"parser": "esprima",
-	"rules": {},
+	"extends": "eslint:recommended",
+	"rules": {
+		    "no-unused-vars": 0
+	},
 	"env": {
 			"browser": true,
 			"node": true,

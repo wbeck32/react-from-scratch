@@ -28,6 +28,7 @@
     "@storybook/react": "^6.1.20",
     "babel-loader": "^8.2.2",
     "css-loader": "^1.0.0",
+    "dotenv-webpack": "^6.0.2",
     "react-hot-loader": "^4.13.0",
     "storybook": "^6.1.11",
     "style-loader": "^0.23.0",
@@ -38,7 +39,13 @@
   "dependencies": {
     "@babel/runtime": "^7.12.5",
     "@material-ui/core": "^4.11.3",
-    "fs": "0.0.1-security",
+    "@octokit/auth-token": "^2.4.5",
+    "@octokit/rest": "^18.3.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.21.0",
+    "express": "^4.17.1",
+    "octonode": "^0.10.0",
+    "path": "^0.12.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0"

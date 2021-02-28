@@ -1,5 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
+
 
 module.exports = {
   entry : './src/index.js',
@@ -36,7 +38,8 @@ module.exports = {
     contentBase : path.join(__dirname, 'public/'),
     port : 3000,
     publicPath : 'http://localhost:3000/dist/',
-    hotOnly : true
+    hotOnly : true,
+		https:true
   },
-  plugins : [new webpack.HotModuleReplacementPlugin()]
+  plugins : [new webpack.HotModuleReplacementPlugin(), new Dotenv()]
 };
