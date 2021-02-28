@@ -31,17 +31,20 @@ const App = () => {
 	}
 	
 	const handleView = async e =>{
+		console.log('e:', e);
 		if (e==='public') {
 			return await publicGists()
-		} 
-		setView(e)
+		} if (e==='add') {
+console.log('adding')
+
+		}else setView(e)
 	}
 	
 	return (
 		<>
 		<Header onClick={handleView} onSearch={handleSearch} />
 		<div className="flex-container">
-		<Sidebar className="sideBar" onClick={handleView} onSearch={handleSearch}/>
+		<Sidebar className="sideBar" onClick={handleView} onSearch={handleSearch} gists={gists} view={view}/>
 		<Main className="main" view={view} gists={gists} />
 		</div>
 		<Footer />

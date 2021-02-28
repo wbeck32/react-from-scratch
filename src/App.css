@@ -65,7 +65,6 @@ li::marker {
 	content:none;
 }
 header {
-	width:100%;
 	background-color: orchid;
 	padding:2%;
 }
@@ -75,7 +74,9 @@ header {
 }
 .sideBar {
 display: inline-block;
-border:1px solid orange
+border:1px solid orange;
+height: 80vh;
+margin:20px 0;
 
 }
 .gist {
