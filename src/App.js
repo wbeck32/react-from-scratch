@@ -5,27 +5,42 @@ import Header from './components/Header'
 import Main from './components/Main'
 import Footer from './components/Footer'
 import Sidebar from './components/Sidebar'
-import response from '../response.json'
 import { Octokit } from "@octokit/rest";
-import { createTokenAuth } from '@octokit/auth-token';
 
 
 const App = () => {
-	const octokit = new Octokit({})
-
+	const octokit = new Octokit({
+		log: {
+			debug: () => {},
+			info: () => {},
+			warn: console.warn,
+			error: console.error
+		}
+	})
+	
 	const [gists,setGists] = useState([])
 	const [view,setView] = useState('home')
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
 	
 	const publicGists = async () => {
-		const res = await fetch(`https://api.github.com/gists/public`);
-		let gistsArray = await res.json();
-		return gistsArray;
+		const publicGs = await octokit.request('GET /gists/public')
+		await setGists(publicGs.data)
+		return
 	}
 	
 	const myGists = async () => {
-		const myGs = await octokit.gists.list();
-		return myGs.data
+		if(!isLoggedIn) {
+			console.log('isLoggedIn:', isLoggedIn);
+			return
+		} else {
+		const myGs = await octokit.request('GET /gists',{
+			headers:{
+				authorization: process.env.GITHUB_PAT
+			}
+		});
+		setGists(myGs.data)
+	}
+		return
 	}
 	
 	const handleSearch = async e => {
@@ -36,55 +51,35 @@ const App = () => {
 		let gistsArray = await res.json();
 		setView('list')
 		setGists(gistsArray)
+		return
 	}
 	
 	const handleView = async e => {
 		console.log('e in handleView:', e);
 		if (e==='public') {
-			const publicGs = await publicGists()
-			setGists(publicGs)
+			await publicGists()
 			setView('list')
 		} 
 		if (e === 'user') {
-			console.log('isLoggedIn:', isLoggedIn);
-			if(!isLoggedIn) {
-				console.log('!isLoggedIn:', !isLoggedIn);
-
-
-			} else {
-				const authenticated = await octokit.request('GET /user')
-				console.log('authenticated:', authenticated);
-				const userGists = await myGists();
-				console.log('userGists:', userGists);
-				setGists(userGists)
+				await myGists();
 				setView('list')
-
-
 			}
-		}
 		if (e==='add') {
-			const code = document.location.search.split('=')[1]
-			console.log('code:', code);
-			console.log('adding')
+			if(!isLoggedIn) {
+				console.log('isLoggedIn:', isLoggedIn);
+				return
+			} else {
+				console.log('adding')
+			}
 		} else setView(e)
+		return
 	}
 	
 	const handleLogin = async () => {
-		const octokit = new Octokit({
-			auth:process.env.GITHUB_PAT,
-			baseUrl: 'https://api.github.com',
-			log: {
-				debug: () => {},
-				info: () => {},
-				warn: console.warn,
-				error: console.error
-			},
-		});
 		setIsLoggedIn(true)
 	}
-
+	
 	const handleLogout = async () => {
-		const octokit = new Octokit({})
 		setIsLoggedIn(false)
 	}
 	
@@ -92,8 +87,8 @@ const App = () => {
 		<>
 		<Header handleLogin={handleLogin} handleLogout={handleLogout}/>
 		<div className="flex-container">
-		<Sidebar className="sideBar" onClick={handleView} onSearch={handleSearch} gists={gists} panel={view}/>
-		<Main className="main" panel={view} gists={gists} />
+		<Sidebar className="sideBar" onClick={handleView} onChange={handleSearch} gists={gists} />
+		<Main className="main" view={view} gists={gists} />
 		</div>
 		<Footer />
 		</>

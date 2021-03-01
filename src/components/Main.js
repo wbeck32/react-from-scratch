@@ -4,26 +4,19 @@ import GistDetail from './GistDetail'
 import { Octokit } from "@octokit/rest";
 
 const Main = props => {
-	const {gists,panel} = props
+	console.log('props in main:', props);
+	const {gists,view} = props
 	
 	const octokit = new Octokit();
 	
 	const [gistText,setGistText] = useState('')
-	const [view,setView] = useState(panel)
-	
-	useEffect(()=>{
-		const handleView = view => {
-			console.log('view:', view);
-			
-		}
-		return handleView(view)
-	},[view])
+	const [showDetail, setShowDetail] = useState(false)
 	
 	const handleSelect = async g => {
 		let gistID = g.id;
 		const gist = await octokit.request(`GET /gists/${gistID}`)
 		setGistText(Object.values(gist.data.files)[0].content)
-		setView('detail')
+		setShowDetail(true)
 	}
 	
 	const handleAdd = e => {
@@ -36,12 +29,12 @@ const Main = props => {
 }
 
 return (
-	(view==='list' &&
+	((view==='list' && !showDetail) &&
 	<ul>
 	<GistList onClick={e=>handleSelect(e)} gists={gists}/>
 	</ul>
 	) ||
-	(view==='detail' &&
+	(showDetail &&
 	<GistDetail gistText={gistText}/>
 	) ||
 	(view==='add' && 

@@ -7,7 +7,6 @@ const {handleLogin,handleLogout} = props
 <header>
 <button onClick={handleLogin}>Login</button>
 <button onClick={handleLogout}>Logout</button>
-
 </header>
 	)
 }

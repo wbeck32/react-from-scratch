@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Sidebar = props => {
-	const {onSearch,onClick} = props
+	const {onChange,onClick} = props
 
 	return (
 		<div className="sideBar">
@@ -13,7 +13,7 @@ const Sidebar = props => {
 		<li onClick={e=>{onClick('add')}}>add a gist</li>
 		</ol>
 		</nav>
-      <input placeholder="search for a user" name="searchInput" onChange={onSearch}/>
+      <input placeholder="search for a user" name="searchInput" onChange={onChange}/>
 		</div>
 	)
 }
