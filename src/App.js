@@ -33,14 +33,31 @@ const App = () => {
 			console.log('isLoggedIn:', isLoggedIn);
 			return
 		} else {
-		const myGs = await octokit.request('GET /gists',{
-			headers:{
-				authorization: process.env.GITHUB_PAT
-			}
-		});
-		setGists(myGs.data)
-	}
+			const myGs = await octokit.request('GET /gists',{
+				headers:{
+					Authorization: `token ${process.env.GITHUB_PAT}`
+				}
+			});
+			setGists(myGs.data)
+		}
 		return
+	}
+	
+	const createGist = async () => {
+		console.log('isLoggedIn:', isLoggedIn);
+		if(!isLoggedIn) {
+			console.log('isLoggedIn - create:', isLoggedIn);
+			return
+		} else {
+			const newGist = await octokit.request('POST /gists',{
+				headers:{
+					Authorization: `token ${process.env.GITHUB_PAT}`
+				},
+				files:{},
+				
+			})
+			console.log('newGist:', newGist);
+		}
 	}
 	
 	const handleSearch = async e => {
@@ -61,16 +78,12 @@ const App = () => {
 			setView('list')
 		} 
 		if (e === 'user') {
-				await myGists();
-				setView('list')
-			}
+			await myGists();
+			setView('list')
+		}
 		if (e==='add') {
-			if(!isLoggedIn) {
-				console.log('isLoggedIn:', isLoggedIn);
-				return
-			} else {
-				console.log('adding')
-			}
+			setView('add')
+			
 		} else setView(e)
 		return
 	}
@@ -88,7 +101,7 @@ const App = () => {
 		<Header handleLogin={handleLogin} handleLogout={handleLogout}/>
 		<div className="flex-container">
 		<Sidebar className="sideBar" onClick={handleView} onChange={handleSearch} gists={gists} />
-		<Main className="main" view={view} gists={gists} />
+		<Main className="main" view={view} createGist={createGist} gists={gists} />
 		</div>
 		<Footer />
 		</>

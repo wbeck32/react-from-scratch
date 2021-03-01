@@ -5,7 +5,7 @@ import { Octokit } from "@octokit/rest";
 
 const Main = props => {
 	console.log('props in main:', props);
-	const {gists,view} = props
+	const {createGist,gists,view} = props
 	
 	const octokit = new Octokit();
 	
@@ -13,23 +13,31 @@ const Main = props => {
 	const [showDetail, setShowDetail] = useState(false)
 	
 	const handleSelect = async g => {
-		let gistID = g.id;
+		let gistID = g.target.id;
 		const gist = await octokit.request(`GET /gists/${gistID}`)
 		setGistText(Object.values(gist.data.files)[0].content)
 		setShowDetail(true)
 	}
 	
-	const handleAdd = e => {
-		console.log('e in add:', e);
-		fetch('https://api.github.com/gists',{
-		method:'post',
-		body:{}
-	})
-	.then(res => console.log(res))
-}
+// 	const handleAdd = async () => {
+// 		console.log('isLoggedIn:', isLoggedIn);
+// 		if(!isLoggedIn) {
+// 			console.log('isLoggedIn:', isLoggedIn);
+// 			return
+// 		} else {
+// 			const newGist = await octokit.request('POST /gists', {
+// 				headers:{
+// 					authorization: process.env.GITHUB_PAT
+// 				},
+// 				files:{}
+// 			});
+// 			console.log('newGist:', newGist);
+// 	}
+// }
+
 
 return (
-	((view==='list' && !showDetail) &&
+	(((view==='public' || view==='user') && !showDetail) &&
 	<ul>
 	<GistList onClick={e=>handleSelect(e)} gists={gists}/>
 	</ul>
@@ -39,8 +47,8 @@ return (
 	) ||
 	(view==='add' && 
 	<>
-	<input name="enterGist" type="text"/>
-	<input type="submit" onClick={e=>handleAdd(e)} value="clicky"/>
+	<input name="enterGist" type="textarea"/>
+	<input type="submit" onClick={e=>createGist(e)} value="clicky"/>
 	</>
 	) ||
 	(<div>Home</div>)
