@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {utilities} from '../utilities';
 import { Octokit } from "@octokit/rest";
 const octokit = new Octokit();
 
 const GistDetail = props => {
-	console.log('props in GistDetail:', props);
+	// console.log('props in GistDetail:', props);
 	const {gistData, gists} = props;
 	const [gistID, setGistID] = useState(gistData.gistID);
 	const [isLoaded, setIsLoaded] = useState(false);

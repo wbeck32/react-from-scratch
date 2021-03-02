@@ -12,7 +12,7 @@ const Main = props => {
 	const [showDetail, setShowDetail] = useState(false);
 	
 	const handleSelect = async g => {
-		setShowDetail(true);
+		setShowDetail(false);
 		const gI = await collectGistInfo(g.target.id);
 		const gistIndex = gs => {
 			return gs.id === g.target.id;

@@ -21,7 +21,7 @@ const App = () => {
 	
 	const [gists, setGists] = useState([]);
 	const [view, setView] = useState('home');
-	const [message, setMessage] = useState('');
+	const [message, setMessage] = useState('Choose an option from the menu on the left.');
 
 	const publicGists = async () => {
 		console.log(1, 'publicGists');
@@ -75,6 +75,7 @@ const App = () => {
 		}
 		switch(e) {
 		case 'home':
+			setMessage('Choose an option from the menu on the left.');
 			setView('home');
 			break;
 		case 'public':
@@ -94,17 +95,10 @@ const App = () => {
 		}
 	};
 	
-	const handleLogin = async () => {
-		localStorage.setItem('loggedIn', 'true');
-	};
-	
-	const handleLogout = async () => {
-		localStorage.removeItem('loggedIn');
-	};
 	
 	return (
 		<>
-			<Header handleLogin={handleLogin} handleLogout={handleLogout}/>
+			<Header />
 			<div className="flex-container">
 				<Sidebar className="sideBar" onClick={handleView} onChange={handleSearch} />
 				<Main view={view} message={message} gists={gists} />
