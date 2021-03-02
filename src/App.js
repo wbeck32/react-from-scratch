@@ -20,6 +20,7 @@ const App = () => {
 	const [gists,setGists] = useState([])
 	const [view,setView] = useState('home')
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
+	const [message,setMessage] = useState('')
 	
 	const publicGists = async () => {
 		console.log(1, 'publicGists');
@@ -47,9 +48,12 @@ const App = () => {
 	const createGist = async () => {
 		console.log(3, 'createGist');
 		if(!isLoggedIn) {
-			console.log('isLoggedIn - createGist:', isLoggedIn);
+			console.log('isLoggedIn 1 - createGist:', isLoggedIn);
+			setErrorMessage('Please click login to proceed.')
+			setView('home')
 			return
 		} else {
+			console.log('isLoggedIn 2 - createGist:', isLoggedIn);
 			const newGist = await octokit.request('POST /gists',{
 				headers:{
 					Authorization: `token ${process.env.GITHUB_PAT}`
@@ -75,8 +79,16 @@ const App = () => {
 	
 	const handleView = async e => {
 		console.log('e in handleView:', e);
+		console.log('isLoggedIn handleView:', isLoggedIn);
 		setGists([])
 		setView('home')
+		setMessage('Choose a menu item.')
+		if((e==='user' || e==='add') && !isLoggedIn) {
+			console.log('isLoggedIn 1 - createGist:', isLoggedIn);
+			setMessage('Please click login to proceed.')
+			setView('home')
+			return
+		}
 		switch(e) {
 			case 'home':
 				setView('home')
@@ -111,7 +123,7 @@ const App = () => {
 		<Header handleLogin={handleLogin} handleLogout={handleLogout}/>
 		<div className="flex-container">
 		<Sidebar className="sideBar" onClick={handleView} onChange={handleSearch} />
-		<Main view={view} gists={gists} />
+		<Main view={view} message={message} gists={gists} />
 		</div>
 		</>
 		);

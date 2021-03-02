@@ -5,7 +5,7 @@ import { Octokit } from "@octokit/rest";
 
 const Main = props => {
 	console.log('props in main:', props);
-	const {gists,view} = props
+	const {message, gists,view} = props
 	
 	const octokit = new Octokit();
 	
@@ -50,7 +50,7 @@ const Main = props => {
 	</>
 } 
 {view==='home' &&
-<div>Home</div>
+<div>{message}</div>
 }
 </div>
 )
