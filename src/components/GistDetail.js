@@ -21,7 +21,7 @@ const GistDetail = props => {
 					setIsLoaded(true);
 					const fileData = Object.entries(result.files)[0];
 					const gistIndex = gs => {
-						return gs.id === result.target.id;
+						return gs.id === result.id;
 					};
 					let index = gists.findIndex(gistIndex);
 					let gistData = {
@@ -38,7 +38,7 @@ const GistDetail = props => {
 						},
 						gistURL:result.html_url
 					};
-					if(gistData.fileType === 'text/markdown') {
+					if(gistData.file.fileType === 'text/markdown') {
 						fetch(`https://api.github.com/markdown`, {
 							text:gistData.file.content
 						})
@@ -85,7 +85,7 @@ const GistDetail = props => {
 				<div onClick={updateGistID}>next</div>
 				<a href="https://localhost:3000">home</a>
 				<div onClick={updateGistID}>previous</div>
-				<div className="gistDetail" dangerouslySetInnerHTML={html}/> 
+				<div className="gistDetail">{currentGist.file.content}</div> 
 			</>
 		);
 	}
