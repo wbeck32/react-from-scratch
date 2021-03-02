@@ -4,6 +4,7 @@ import "./App.css"
 import Header from './components/Header'
 import Main from './components/Main'
 import Sidebar from './components/Sidebar'
+import response from '../response.json'
 import { Octokit } from "@octokit/rest";
 
 
@@ -21,49 +22,40 @@ const App = () => {
 	const [view,setView] = useState('home')
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
 	const [message,setMessage] = useState('')
-	
+	const [showDetail, setShowDetail] = useState(false)
+
 	const publicGists = async () => {
 		console.log(1, 'publicGists');
-		const publicGs = await octokit.request('GET /gists/public')
-		setGists(publicGs.data)
+		// const publicGs = await octokit.request('GET /gists/public')
+		// setGists(publicGs.data)
+		setGists(response)
 		return
 	}
 	
 	const myGists = async () => {
 		console.log(2, 'myGists');
-		if(!isLoggedIn) {
-			console.log('isLoggedIn - myGists:', isLoggedIn);
-			return
-		} else {
 			const myGs = await octokit.request('GET /gists',{
 				headers:{
 					Authorization: `token ${process.env.GITHUB_PAT}`
 				}
 			});
 			setGists(myGs.data)
+			return
 		}
-		return
-	}
 	
 	const createGist = async () => {
 		console.log(3, 'createGist');
-		if(!isLoggedIn) {
-			console.log('isLoggedIn 1 - createGist:', isLoggedIn);
-			setErrorMessage('Please click login to proceed.')
-			setView('home')
-			return
-		} else {
 			console.log('isLoggedIn 2 - createGist:', isLoggedIn);
 			const newGist = await octokit.request('POST /gists',{
-				headers:{
+				headers: {
 					Authorization: `token ${process.env.GITHUB_PAT}`
 				},
 				files:{},
 				
 			})
 			console.log('newGist:', newGist);
+			return
 		}
-	}
 	
 	const handleSearch = async e => {
 		console.log(4, 'handleSearch');

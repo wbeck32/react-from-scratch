@@ -69,22 +69,21 @@ header {
 	padding:2%;
 }
 .main {
-	border:1px solid red;
 	display:inline-block;
 }
 .sideBar {
-display: inline-block;
-height: 80vh;
-margin:10px;
-
+	display: inline-block;
+	height: 80vh;
+	margin:10px;
 }
+
 .gist {
-margin:10px 0;
+	margin:10px 0;
 }
 
 .gistDetail {
 	font-family:'neuehanskendrick-light';
 	width:65vw;
-	padding:1% 5%;
-
+	padding:5%;
+	overflow-wrap: anywhere;
 }

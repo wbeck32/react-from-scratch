@@ -5,9 +5,11 @@ const GistList = props => {
 	const {gists,onClick} = props
 
 	return (
-		gists.map(g=>{
-		return (<li key={g.id} id={g.id} onClick={g=>onClick(g)} className="gist">{g.description}</li>)		
+		(gists.length > 0 && 
+			gists.map(g=>{
+				return (<li key={g.id} id={g.id} onClick={g=>onClick(g)} className="gist">{g.description}</li>)		
 			})
-			)
-		}
+		)
+	)
+}
 		export default GistList
