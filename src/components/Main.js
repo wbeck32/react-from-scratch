@@ -5,40 +5,55 @@ import { Octokit } from "@octokit/rest";
 
 const Main = props => {
 	console.log('props in main:', props);
-	const {createGist,gists,view,detail} = props
+	const {gists,view} = props
 	
 	const octokit = new Octokit();
 	
 	const [gistText,setGistText] = useState('')
-	const [showDetail, setShowDetail] = useState(detail)
+	const [showDetail, setShowDetail] = useState(false)
 	
 	const handleSelect = async g => {
 		setShowDetail(false)
 		let gistID = g.target.id;
 		const gist = await octokit.request(`GET /gists/${gistID}`)
-		setGistText(Object.values(gist.data.files)[0].content)
+		const gistInfo = Object.values(gist.data.files)[0]
+		console.log('gistInfo:', gistInfo);
+		if(gistInfo.type === 'text/markdown') {
+			const mdToHTML = await octokit.request('POST /markdown',{
+				text:gistInfo.content,
+				mode:'markdown'
+			})
+			console.log('mdToHTML:', mdToHTML);
+			setGistText(mdToHTML.data)
+			setShowDetail(true)
+			return
+		}
+		setGistText(gistInfo.content)
 		setShowDetail(true)
+		return
 	}
-
-return (
-	(((view==='public' || view==='user') && !showDetail) &&
-	<ul>
-	<GistList onClick={e=>handleSelect(e)} gists={gists}/>
-	</ul>
-	) ||
-	(showDetail &&
-	<GistDetail gistText={gistText}/>
-	) ||
-	(view==='add' && 
+	
+	return (
+		<div className="main">
+		{view==='list' && !showDetail &&
+		<ul>
+		<GistList onClick={e=>handleSelect(e)} gists={gists}/>
+		</ul>
+	} 
+	{showDetail &&
+		<GistDetail gistText={gistText}/>
+	} 
+	{view==='add' && 
 	<>
 	<input name="enterGist" type="textarea"/>
-	<input type="submit" onClick={e=>createGist(e)} value="clicky"/>
+	<input type="submit" value="clicky"/>
 	</>
-	) ||
-	(view==='home' &&
-	<div>Home</div>
-	)
-	)
+} 
+{view==='home' &&
+<div>Home</div>
+}
+</div>
+)
 }
 
 export default Main

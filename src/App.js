@@ -76,6 +76,7 @@ const App = () => {
 	const handleView = async e => {
 		console.log('e in handleView:', e);
 		setGists([])
+		setView('home')
 		switch(e) {
 			case 'home':
 				setView('home')
@@ -110,7 +111,7 @@ const App = () => {
 		<Header handleLogin={handleLogin} handleLogout={handleLogout}/>
 		<div className="flex-container">
 		<Sidebar className="sideBar" onClick={handleView} onChange={handleSearch} />
-		<Main className="main" view={view} gists={gists} />
+		<Main view={view} gists={gists} />
 		</div>
 		</>
 		);
