@@ -105,11 +105,13 @@ const App = () => {
 	
 	return (
 		<>
-			<Header handleLogin={handleLogin} handleLogout={handleLogout}/>
-			<div className="flex-container">
-				<Sidebar className="sideBar" onClick={handleView} onChange={handleSearch} />
-				<Main view={view} message={message} gists={gists} />
-			</div>
+			<React.StrictMode>
+				<Header handleLogin={handleLogin} handleLogout={handleLogout}/>
+				<div className="flex-container">
+					<Sidebar className="sideBar" onClick={handleView} onChange={handleSearch} />
+					<Main view={view} message={message} gists={gists} />
+				</div>
+			</React.StrictMode>
 		</>
 	);
 };

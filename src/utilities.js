@@ -3,6 +3,7 @@ const octokit = new Octokit();
 
 export const utilities = {
 	collectGistInfo: async gistID => {
+		console.log('gistID:', gistID);
 		let gistInfo = {};
 		const gist = await octokit.request(`GET /gists/${gistID}`, {
 			headers:{
