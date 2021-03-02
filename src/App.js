@@ -20,15 +20,13 @@ const App = () => {
 	
 	const [gists,setGists] = useState([])
 	const [view,setView] = useState('home')
-	const [isLoggedIn, setIsLoggedIn] = useState(false)
 	const [message,setMessage] = useState('')
 	const [showDetail, setShowDetail] = useState(false)
 
 	const publicGists = async () => {
 		console.log(1, 'publicGists');
-		// const publicGs = await octokit.request('GET /gists/public')
-		// setGists(publicGs.data)
-		setGists(response)
+		const publicGs = await octokit.request('GET /gists/public')
+		setGists(publicGs.data)
 		return
 	}
 	
@@ -45,13 +43,11 @@ const App = () => {
 	
 	const createGist = async () => {
 		console.log(3, 'createGist');
-			console.log('isLoggedIn 2 - createGist:', isLoggedIn);
 			const newGist = await octokit.request('POST /gists',{
 				headers: {
 					Authorization: `token ${process.env.GITHUB_PAT}`
 				},
 				files:{},
-				
 			})
 			console.log('newGist:', newGist);
 			return
@@ -71,12 +67,9 @@ const App = () => {
 	
 	const handleView = async e => {
 		console.log('e in handleView:', e);
-		console.log('isLoggedIn handleView:', isLoggedIn);
 		setGists([])
-		setView('home')
 		setMessage('Choose a menu item.')
-		if((e==='user' || e==='add') && !isLoggedIn) {
-			console.log('isLoggedIn 1 - createGist:', isLoggedIn);
+		if((e==='user' || e==='add') && !localStorage.getItem('loggedIn')) {
 			setMessage('Please click login to proceed.')
 			setView('home')
 			return
@@ -103,11 +96,11 @@ const App = () => {
 	}
 	
 	const handleLogin = async () => {
-		setIsLoggedIn(true)
+		localStorage.setItem('loggedIn', 'true')
 	}
 	
 	const handleLogout = async () => {
-		setIsLoggedIn(false)
+		localStorage.removeItem('loggedIn')
 	}
 	
 	return (
