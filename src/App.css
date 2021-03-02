@@ -74,9 +74,8 @@ header {
 }
 .sideBar {
 display: inline-block;
-border:1px solid orange;
 height: 80vh;
-margin:20px 0;
+margin:10px;
 
 }
 .gist {
@@ -85,6 +84,7 @@ margin:10px 0;
 
 .gistDetail {
 	font-family:'neuehanskendrick-light';
-	width:65vw
+	width:65vw;
+	padding:1% 5%;
 
 }

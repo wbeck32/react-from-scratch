@@ -3,7 +3,6 @@ import { hot } from 'react-hot-loader'
 import "./App.css"
 import Header from './components/Header'
 import Main from './components/Main'
-import Footer from './components/Footer'
 import Sidebar from './components/Sidebar'
 import { Octokit } from "@octokit/rest";
 
@@ -12,7 +11,7 @@ const App = () => {
 	const octokit = new Octokit({
 		log: {
 			debug: () => {},
-			info: () => {},
+			info:console.info,
 			warn: console.warn,
 			error: console.error
 		}
@@ -23,14 +22,16 @@ const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
 	
 	const publicGists = async () => {
+		console.log(1, 'publicGists');
 		const publicGs = await octokit.request('GET /gists/public')
-		await setGists(publicGs.data)
+		setGists(publicGs.data)
 		return
 	}
 	
 	const myGists = async () => {
+		console.log(2, 'myGists');
 		if(!isLoggedIn) {
-			console.log('isLoggedIn:', isLoggedIn);
+			console.log('isLoggedIn - myGists:', isLoggedIn);
 			return
 		} else {
 			const myGs = await octokit.request('GET /gists',{
@@ -44,9 +45,9 @@ const App = () => {
 	}
 	
 	const createGist = async () => {
-		console.log('isLoggedIn:', isLoggedIn);
+		console.log(3, 'createGist');
 		if(!isLoggedIn) {
-			console.log('isLoggedIn - create:', isLoggedIn);
+			console.log('isLoggedIn - createGist:', isLoggedIn);
 			return
 		} else {
 			const newGist = await octokit.request('POST /gists',{
@@ -61,6 +62,7 @@ const App = () => {
 	}
 	
 	const handleSearch = async e => {
+		console.log(4, 'handleSearch');
 		let userName = e.target.value;
 		if (!userName) return;
 		userName = encodeURI(userName);
@@ -73,19 +75,26 @@ const App = () => {
 	
 	const handleView = async e => {
 		console.log('e in handleView:', e);
-		if (e==='public') {
-			await publicGists()
-			setView('list')
-		} 
-		if (e === 'user') {
-			await myGists();
-			setView('list')
+		setGists([])
+		switch(e) {
+			case 'home':
+				setView('home')
+				break;
+			case 'public':
+				await publicGists()
+				setView('list')
+				break;
+			case 'user':
+				await myGists();
+				setView('list')
+				break;
+			case 'add':
+				await createGist()
+				setView('add')
+				break;
+			default:
+				break;
 		}
-		if (e==='add') {
-			setView('add')
-			
-		} else setView(e)
-		return
 	}
 	
 	const handleLogin = async () => {
@@ -100,10 +109,9 @@ const App = () => {
 		<>
 		<Header handleLogin={handleLogin} handleLogout={handleLogout}/>
 		<div className="flex-container">
-		<Sidebar className="sideBar" onClick={handleView} onChange={handleSearch} gists={gists} />
-		<Main className="main" view={view} createGist={createGist} gists={gists} />
+		<Sidebar className="sideBar" onClick={handleView} onChange={handleSearch} />
+		<Main className="main" view={view} gists={gists} />
 		</div>
-		<Footer />
 		</>
 		);
 	}

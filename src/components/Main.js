@@ -5,36 +5,20 @@ import { Octokit } from "@octokit/rest";
 
 const Main = props => {
 	console.log('props in main:', props);
-	const {createGist,gists,view} = props
+	const {createGist,gists,view,detail} = props
 	
 	const octokit = new Octokit();
 	
 	const [gistText,setGistText] = useState('')
-	const [showDetail, setShowDetail] = useState(false)
+	const [showDetail, setShowDetail] = useState(detail)
 	
 	const handleSelect = async g => {
+		setShowDetail(false)
 		let gistID = g.target.id;
 		const gist = await octokit.request(`GET /gists/${gistID}`)
 		setGistText(Object.values(gist.data.files)[0].content)
 		setShowDetail(true)
 	}
-	
-// 	const handleAdd = async () => {
-// 		console.log('isLoggedIn:', isLoggedIn);
-// 		if(!isLoggedIn) {
-// 			console.log('isLoggedIn:', isLoggedIn);
-// 			return
-// 		} else {
-// 			const newGist = await octokit.request('POST /gists', {
-// 				headers:{
-// 					authorization: process.env.GITHUB_PAT
-// 				},
-// 				files:{}
-// 			});
-// 			console.log('newGist:', newGist);
-// 	}
-// }
-
 
 return (
 	(((view==='public' || view==='user') && !showDetail) &&
@@ -51,7 +35,9 @@ return (
 	<input type="submit" onClick={e=>createGist(e)} value="clicky"/>
 	</>
 	) ||
-	(<div>Home</div>)
+	(view==='home' &&
+	<div>Home</div>
+	)
 	)
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const GistList = props => {
-	console.log('props in gist list:', props);
+	console.log('props in GistList:', props);
 	const {gists,onClick} = props
 
 	return (
