@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import GistList from './GistList';
 import GistDetail from './GistDetail';
-import response from '../../response.json';
 import {utilities} from '../utilities';
 const {collectGistInfo} = utilities;
 
@@ -15,7 +14,11 @@ const Main = props => {
 	const handleSelect = async g => {
 		setShowDetail(true);
 		const gI = await collectGistInfo(g.target.id);
-		setGistData(gI);
+		const gistIndex = gs => {
+			return gs.id === g.target.id;
+		};
+		let index = gists.findIndex(gistIndex);
+		setGistData({...gI, index});
 		return; 
 	};
 	
@@ -27,7 +30,7 @@ const Main = props => {
 				</ul>
 			} 
 			{(showDetail && gistData) &&
-				<GistDetail showDetail={showDetail} gistData={gistData} gists={gists} />
+				<GistDetail gistData={gistData} gists={gists} />
 			} 
 			{view==='add' && 
 			<>

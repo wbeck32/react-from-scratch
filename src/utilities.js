@@ -3,28 +3,27 @@ const octokit = new Octokit();
 
 export const utilities = {
 	collectGistInfo: async gistID => {
-		console.log('gistID:', gistID);
 		let gistInfo = {};
-		const gist = await octokit.request(`GET /gists/${gistID}`, {
-			headers:{
-				Authorization: `token ${process.env.GITHUB_PAT}`
-			}
-		});
-
+		const gist = await octokit.request(`GET /gists/${gistID}`);
+		const fileData = Object.entries(gist.data.files)[0];
+		
 		gistInfo = {
-			gistHtml:'',
-			gistID,
-			gistText: Object.values(gist.data.files)[0],
-			gistOwner:{
-				name: gist.data.owner.login,
-				URL:gist.data.owner.url
+			id:gist.data.id,
+			owner:{
+				username:gist.data.owner.login,
+				profile:gist.data.owner.html_url
+			},
+			file: {
+				fileName:fileData[1].fileName,
+				fileType:fileData[1].type,
+				content:fileData[1].content
 			},
 			gistURL: gist.data.html_url
 		};
 
-		if(gistInfo.gistText.type === 'text/markdown') {
+		if(gistInfo.file.type === 'text/markdown') {
 			const mdToHTML = await octokit.request('POST /markdown', {
-				text:gistInfo.gistText.content,
+				text:gistInfo.file.content,
 				mode:'markdown'
 			});
 			gistInfo = {
@@ -35,10 +34,9 @@ export const utilities = {
 		} else {
 			gistInfo = {
 				...gistInfo, 
-				gistHtml:gistInfo.gistText.content
+				gistHtml:gistInfo.file.content
 			};
 		}
-		console.log('gistInfo in util:', gistInfo);
 		return gistInfo;
 	}
 };

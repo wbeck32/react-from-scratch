@@ -59,7 +59,7 @@ const App = () => {
 		if (!userName) return;
 		userName = encodeURI(userName);
 		const res = await fetch(`https://api.github.com/users/${userName}/gists`);
-		let gistsArray = await res.json();
+		const gistsArray = await res.json();
 		setView('list');
 		setGists(gistsArray);
 		return;
@@ -68,7 +68,6 @@ const App = () => {
 	const handleView = async e => {
 		console.log('e in handleView:', e);
 		setGists([]);
-		setMessage('Choose a menu item.');
 		if((e==='user' || e==='add') && !localStorage.getItem('loggedIn')) {
 			setMessage('Please click login to proceed.');
 			setView('home');
@@ -105,13 +104,11 @@ const App = () => {
 	
 	return (
 		<>
-			<React.StrictMode>
-				<Header handleLogin={handleLogin} handleLogout={handleLogout}/>
-				<div className="flex-container">
-					<Sidebar className="sideBar" onClick={handleView} onChange={handleSearch} />
-					<Main view={view} message={message} gists={gists} />
-				</div>
-			</React.StrictMode>
+			<Header handleLogin={handleLogin} handleLogout={handleLogout}/>
+			<div className="flex-container">
+				<Sidebar className="sideBar" onClick={handleView} onChange={handleSearch} />
+				<Main view={view} message={message} gists={gists} />
+			</div>
 		</>
 	);
 };

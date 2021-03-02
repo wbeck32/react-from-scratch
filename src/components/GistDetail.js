@@ -5,80 +5,90 @@ const octokit = new Octokit();
 
 const GistDetail = props => {
 	console.log('props in GistDetail:', props);
-	const {gistData, gists, showDetail} = props;
+	const {gistData, gists} = props;
 	const [gistID, setGistID] = useState(gistData.gistID);
 	const [isLoaded, setIsLoaded] = useState(false);
-	const [currentGist, setCurrentGist] = useState({});
+	const [currentGist, setCurrentGist] = useState(gistData);
+	const [index, setIndex] = useState(gistData.index);
 	const [error, setError] = useState();
-	const {collectGistInfo} = utilities;
 	let html = {__html: gistData.gistHtml};
 
 	useEffect(() => {
 		fetch(`https://api.github.com/gists/${gistID}`)
 			.then(res => res.json())
 			.then(
-				(result) => {
-					
+				(result) => {	
+					console.log('result:', result);
 					setIsLoaded(true);
-					setCurrentGist(result);
-					console.log('result:', result, isLoaded, currentGist);
+					const fileData = Object.entries(result.files)[0];
+					const gistIndex = gs => {
+						return gs.id === result.target.id;
+					};
+					let index = gists.findIndex(gistIndex);
+					let gistData = {
+						id:result.id,
+						index,
+						owner:{
+							username:result.owner.login,
+							profile:result.owner.html_url
+						},
+						file: {
+							fileName:fileData[1].fileName,
+							fileType:fileData[1].type,
+							content:fileData[1].content
+						},
+						gistURL:result.html_url
+					};
+					if(gistData.fileType === 'text/markdown') {
+						fetch(`https://api.github.com/markdown`, {
+							text:gistData.file.content
+						})
+							.then(res => res.json())
+							.then((r) => {
+								gistData = {
+									...gistData,
+									file:{
+										content:r
+									}
+								};
+							});
+					}
+					setCurrentGist(gistData);
 				},
-				// Note: it's important to handle errors here
-				// instead of a catch() block so that we don't swallow
-				// exceptions from actual bugs in components.
 				(error) => {
-					console.log('error:', error);
 					setIsLoaded(true);
 					setError(error);
 				}
 			);
-	}, []);
-
-	// if (error) {
-	// 	console.log('error:', error);
-	// 	return <div>Error: {error.message}</div>;
-	// } else if (!isLoaded) {
-	// 	return <div>Loading...</div>;
-	// } else {
-	return (
-		<div>boyHowdy</div>
-	);
+	}, [gistID]);
+				
+	const updateGistID = e => {					
+		const direction = e.target.innerText;
+		let newIndex = 0;
+		direction === 'next' ? newIndex = index + 1 : newIndex = index - 1;
+		console.log('index:', index);
+		console.log('newIndex:', newIndex);
+		const newGist = gists[newIndex];
+		console.log('newGist:', newGist);
+		const gID = newGist.id;
+		setGistID(gID);
+		setIndex(newIndex);
+		return;
+	};
+				
+	if (error) {
+		return <div>Error: {error.message}</div>;
+	} else if (!isLoaded) {
+		return <div>Loading...</div>;
+	} else {			
+		return (
+			<>
+				<div onClick={updateGistID}>next</div>
+				<a href="https://localhost:3000">home</a>
+				<div onClick={updateGistID}>previous</div>
+				<div className="gistDetail" dangerouslySetInnerHTML={html}/> 
+			</>
+		);
+	}
 };
-		
-//  <ul>
-// 	{currentGist.map(item => (
-// 		<li key={item.id}>
-// 			{item.name} {item.price}
-// 		</li>
-// 	))}
-// </ul> 
-		
-// const createGistData = async gist => {
-// 	const direction = gist.target.innerText;
-// 	let newIndex = 0;
-// 	const gistIndex = gs => {
-// 		return gs.id === gist.target.id;
-// 	};
-// 	let thisIndex = gists.findIndex(gistIndex);
-// 	direction === 'next' ? newIndex = thisIndex + 1 : newIndex =thisIndex - 1;
-// 	console.log('thisIndex:', thisIndex);
-// 	console.log('newIndex:', newIndex);
-// 	const newGist = gists[newIndex];
-// 	const gistID = newGist.id;
-// 	const gistInfo = await collectGistInfo(gistID);
-// 	console.log('gistInfo in detail:', gistInfo);
-// 	html = {__html: gistInfo.gistHtml};
-// 	return; 
-// };
-	
-// return (
-// 	(showDetail &&
-// 		<>
-// 			<div onClick={createGistData} id={gistData.gistID}>next</div>
-// 			<div onClick={createGistData}>home</div>
-// 			<div onClick={createGistData} id={gistData.gistID}>previous</div>
-// 			<div dangerouslySetInnerHTML={html} className="gistDetail"/> 
-// 		</>
-// 	)
-// );
 export default GistDetail;
