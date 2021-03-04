@@ -7,7 +7,7 @@ const GistList = props => {
 	return (
 		(gists.length > 0 && 
 			gists.map(g => {
-				return (<li key={g.id} id={g.id} onClick={g => onClick(g)} className="gist">{g.description}</li>);		
+				return (<li key={g.id} id={g.id} onClick={g => onClick(g)} className="gist">{g.description ? g.description : g.filename}</li>);		
 			})
 		)
 	);

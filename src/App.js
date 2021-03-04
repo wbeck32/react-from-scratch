@@ -1,5 +1,5 @@
 "use strict";
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { hot } from 'react-hot-loader';
 import "./App.css";
 import Header from './components/Header';
@@ -7,25 +7,41 @@ import Main from './components/Main';
 import Sidebar from './components/Sidebar';
 import response from '../response.json';
 import { Octokit } from "@octokit/rest";
-
+import {utilities} from './utilities';
+const {collectGistInfo} = utilities;
 
 const App = () => {
-	const octokit = new Octokit({
-		log: {
-			debug: () => {},
-			info:console.info,
-			warn: console.warn,
-			error: console.error
-		}
-	});
+	const octokit = new Octokit();
 	
 	const [gists, setGists] = useState([]);
-	const [view, setView] = useState('home');
+	const [view, __setView] = useState('home');
 	const [message, setMessage] = useState('Choose an option from the menu on the left.');
+
+	const viewRef = useRef(view);
+	const setView = currentView => {
+		viewRef.current = currentView;
+		__setView(currentView);
+	};
+
+	const listener = () => {
+		console.log(`state in handler: ${viewRef.current}`);
+		// state in handler: 1
+		// state in handler: 2
+		// etc...
+	};
+
+	useEffect(() => {
+		window.addEventListener('click', listener);
+	});
 
 	const publicGists = async () => {
 		console.log(1, 'publicGists');
 		const publicGs = await octokit.request('GET /gists/public');
+		let publicArr = [];
+		publicGs.data.forEach(i => {
+			return collectGistInfo(i.id)
+				.then(data => publicArr.push(data));
+		});
 		setGists(publicGs.data);
 		return;
 	};
@@ -44,12 +60,21 @@ const App = () => {
 	const createGist = async () => {
 		console.log(3, 'createGist');
 		const newGist = await octokit.request('POST /gists', {
-			headers: {
+			headers:{
 				Authorization: `token ${process.env.GITHUB_PAT}`
 			},
-			files:{},
+			"public":true,
+			"files":{
+				"addgist.txt":{
+					"content":"This is a cool way to add a gist!"
+				}},
 		});
-		console.log('newGist:', newGist);
+		const gI = await collectGistInfo(newGist.data.id);
+		console.log('gI:', gI);
+		setGists({
+			...gists,
+			gI
+		});
 		return;
 	};
 	

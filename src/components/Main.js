@@ -8,10 +8,11 @@ const Main = props => {
 	console.log('props in main:', props);
 	const {message, gists, view} = props;
 	
-	const [gistData, setGistData] = useState(0);
+	const [gistData, setGistData] = useState();
 	const [showDetail, setShowDetail] = useState(false);
 	
 	const handleSelect = async g => {
+		console.log('g:', g);
 		setShowDetail(true);
 		const gI = await collectGistInfo(g.target.id);
 		const gistIndex = gs => {

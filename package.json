@@ -29,6 +29,7 @@
     "babel-loader": "^8.2.2",
     "css-loader": "^1.0.0",
     "dotenv-webpack": "^6.0.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "react-hot-loader": "^4.13.0",
     "storybook": "^6.1.11",
     "style-loader": "^0.23.0",

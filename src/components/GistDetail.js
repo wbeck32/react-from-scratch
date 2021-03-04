@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { Octokit } from "@octokit/rest";
-const octokit = new Octokit();
 
 const GistDetail = props => {
 	// console.log('props in GistDetail:', props);
@@ -20,6 +19,7 @@ const GistDetail = props => {
 					console.log('result:', result);
 					setIsLoaded(true);
 					const fileData = Object.entries(result.files)[0];
+					console.log('fileData:', fileData);
 					const gistIndex = gs => {
 						return gs.id === result.id;
 					};
@@ -34,7 +34,8 @@ const GistDetail = props => {
 						file: {
 							fileName:fileData[1].fileName,
 							fileType:fileData[1].type,
-							content:fileData[1].content
+							content:fileData[1].content,
+							description:result.description
 						},
 						gistURL:result.html_url
 					};
@@ -52,6 +53,7 @@ const GistDetail = props => {
 								};
 							});
 					}
+					console.log('gistData:', gistData);
 					setCurrentGist(gistData);
 				},
 				(error) => {

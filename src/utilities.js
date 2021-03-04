@@ -14,9 +14,10 @@ export const utilities = {
 				profile:gist.data.owner.html_url
 			},
 			file: {
-				fileName:fileData[1].fileName,
+				fileName:fileData[0],
 				fileType:fileData[1].type,
-				content:fileData[1].content
+				content:fileData[1].content,
+				description: gist.data.description || fileData[0].fileName
 			},
 			gistURL: gist.data.html_url
 		};
