@@ -1,5 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import { Octokit } from "@octokit/rest";
+import React, {useEffect, useReducer, useState} from 'react';
+
+const reducer = (state, action) => {
+	switch(action.type) {
+	case 'next':
+		return {index:state.index + 1};
+	case 'prev':
+		return {index:state.index - 1};
+	}
+};
 
 const GistDetail = props => {
 	// console.log('props in GistDetail:', props);
@@ -7,10 +15,10 @@ const GistDetail = props => {
 	const [gistID, setGistID] = useState(gistData.gistID);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [currentGist, setCurrentGist] = useState(gistData);
-	const [index, setIndex] = useState(gistData.index);
+	const initialIndex = {index:gistData.index};
+	const [state, dispatch] = useReducer(reducer, initialIndex);
 	const [error, setError] = useState();
-	let html = {__html: gistData.gistHtml};
-
+	
 	useEffect(() => {
 		fetch(`https://api.github.com/gists/${gistID}`)
 			.then(res => res.json())
@@ -61,21 +69,8 @@ const GistDetail = props => {
 					setError(error);
 				}
 			);
-	}, [gistID]);
+	}, [gistID, gists]);
 				
-	const updateGistID = e => {					
-		const direction = e.target.innerText;
-		let newIndex = 0;
-		direction === 'next' ? newIndex = index + 1 : newIndex = index - 1;
-		console.log('index:', index);
-		console.log('newIndex:', newIndex);
-		const newGist = gists[newIndex];
-		console.log('newGist:', newGist);
-		const gID = newGist.id;
-		setGistID(gID);
-		setIndex(newIndex);
-		return;
-	};
 				
 	if (error) {
 		return <div>Error: {error.message}</div>;
@@ -84,10 +79,10 @@ const GistDetail = props => {
 	} else {			
 		return (
 			<>
-				<div onClick={updateGistID}>next</div>
+				<div onClick={() => dispatch({type:'next'})}>next</div>
 				<a href="https://localhost:3000">home</a>
-				<div onClick={updateGistID}>previous</div>
-				<div className="gistDetail">{currentGist.file.content}</div> 
+				<div onClick={() => dispatch({type:'prev'})}>previous</div>
+				<div className="gistDetail">{sy}</div> 
 			</>
 		);
 	}

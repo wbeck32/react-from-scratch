@@ -4,8 +4,8 @@ const Header = () => {
 	const [text, setText] = useState(`Log in`);
 
 	const handleAuth = async () => {
-		const auth = localStorage.getItem('loggedIn');
-		!auth ? localStorage.setItem('loggedIn', true) : localStorage.removeItem('loggedIn');
+		const auth = sessionStorage.getItem('loggedIn');
+		!auth ? sessionStorage.setItem('loggedIn', true) : sessionStorage.removeItem('loggedIn');
 		auth ? setText(`Log in`) : setText(`Log out`);
 	};
 	

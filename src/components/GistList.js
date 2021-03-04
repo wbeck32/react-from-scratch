@@ -1,4 +1,5 @@
 import React from 'react';
+import response from '../../response.json';
 
 const GistList = props => {
 	// console.log('props in GistList:', props);

@@ -2,24 +2,23 @@ import React, {useState, useEffect} from 'react';
 import GistList from './GistList';
 import GistDetail from './GistDetail';
 import {utilities} from '../utilities';
+import zIndex from '@material-ui/core/styles/zIndex';
 const {collectGistInfo} = utilities;
 
 const Main = props => {
 	console.log('props in main:', props);
 	const {message, gists, view} = props;
-	
 	const [gistData, setGistData] = useState();
+	const [selectedIndex, setSelectedIndex] = useState();
 	const [showDetail, setShowDetail] = useState(false);
 	
 	const handleSelect = async g => {
-		console.log('g:', g);
 		setShowDetail(true);
-		const gI = await collectGistInfo(g.target.id);
 		const gistIndex = gs => {
 			return gs.id === g.target.id;
 		};
 		let index = gists.findIndex(gistIndex);
-		setGistData({...gI, index});
+		setSelectedIndex(index);
 		return; 
 	};
 	
@@ -31,7 +30,7 @@ const Main = props => {
 				</ul>
 			} 
 			{(showDetail && gistData) &&
-				<GistDetail gistData={gistData} gists={gists} />
+				<GistDetail currentGist={gists[selectedIndex]} gists={gists} />
 			} 
 			{view==='add' && 
 			<>

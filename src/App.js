@@ -1,5 +1,5 @@
 "use strict";
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import { hot } from 'react-hot-loader';
 import "./App.css";
 import Header from './components/Header';
@@ -14,46 +14,52 @@ const App = () => {
 	const octokit = new Octokit();
 	
 	const [gists, setGists] = useState([]);
-	const [view, __setView] = useState('home');
+	const [view, setView] = useState('home');
 	const [message, setMessage] = useState('Choose an option from the menu on the left.');
-
-	const viewRef = useRef(view);
-	const setView = currentView => {
-		viewRef.current = currentView;
-		__setView(currentView);
-	};
-
-	const listener = () => {
-		console.log(`state in handler: ${viewRef.current}`);
-		// state in handler: 1
-		// state in handler: 2
-		// etc...
-	};
-
-	useEffect(() => {
-		window.addEventListener('click', listener);
-	});
-
+	
 	const publicGists = async () => {
 		console.log(1, 'publicGists');
-		const publicGs = await octokit.request('GET /gists/public');
 		let publicArr = [];
-		publicGs.data.forEach(i => {
-			return collectGistInfo(i.id)
-				.then(data => publicArr.push(data));
-		});
-		setGists(publicGs.data);
+		fetch(`https://api.github.com/gists/public`)
+			.then(res => res.json())
+			.then(
+				(result) => {	
+					console.log('result:', result);
+				});
+				{
+					"message": "API rate limit exceeded for 71.59.212.184. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)",
+					"documentation_url": "https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"
+				}
+
+		// const publicGs = await octokit.request('GET /gists/public',
+		// 	{headers:{
+		// 		Authorization: `token ${process.env.GITHUB_PAT}`
+		// 	}});
+		// publicGs.data.forEach(i => {
+		// 	return collectGistInfo(i.id)
+		// 		.then(item => publicArr.push(item));
+		// });
+		console.log('publicArr:', publicArr);
+		setGists(publicArr);
 		return;
 	};
 	
 	const myGists = async () => {
 		console.log(2, 'myGists');
+		let myArr = [];
 		const myGs = await octokit.request('GET /gists', {
 			headers:{
 				Authorization: `token ${process.env.GITHUB_PAT}`
 			}
 		});
-		setGists(myGs.data);
+		myGs.data.forEach(i => {
+			return collectGistInfo(i.id)
+				.then(item => {
+					console.log('item:', item);
+					myArr.push(item);
+				});
+		});
+		setGists(myArr);
 		return;
 	};
 	
@@ -70,9 +76,10 @@ const App = () => {
 				}},
 		});
 		const gI = await collectGistInfo(newGist.data.id);
-		console.log('gI:', gI);
+		const userGists = await myGists();
+		setView('list');
 		setGists({
-			...gists,
+			...userGists,
 			gI
 		});
 		return;
@@ -93,7 +100,7 @@ const App = () => {
 	const handleView = async e => {
 		console.log('e in handleView:', e);
 		setGists([]);
-		if((e==='user' || e==='add') && !localStorage.getItem('loggedIn')) {
+		if((e==='user' || e==='add') && !sessionStorage.getItem('loggedIn')) {
 			setMessage('Please click login to proceed.');
 			setView('home');
 			return;
@@ -119,7 +126,6 @@ const App = () => {
 			break;
 		}
 	};
-	
 	
 	return (
 		<>
