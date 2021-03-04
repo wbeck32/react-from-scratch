@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode development",
-    "build": "webpack --mode development",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -48,6 +48,9 @@
     "octonode": "^0.10.0",
     "path": "^0.12.7",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "workbox-core": "^6.1.1",
+    "workbox-precaching": "^6.1.1",
+    "workbox-webpack-plugin": "^6.1.1"
   }
 }

@@ -20,25 +20,15 @@ const App = () => {
 	const publicGists = async () => {
 		console.log(1, 'publicGists');
 		let publicArr = [];
-		fetch(`https://api.github.com/gists/public`)
-			.then(res => res.json())
-			.then(
-				(result) => {	
-					console.log('result:', result);
-				});
-				{
-					"message": "API rate limit exceeded for 71.59.212.184. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)",
-					"documentation_url": "https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"
-				}
-
-		// const publicGs = await octokit.request('GET /gists/public',
-		// 	{headers:{
-		// 		Authorization: `token ${process.env.GITHUB_PAT}`
-		// 	}});
-		// publicGs.data.forEach(i => {
-		// 	return collectGistInfo(i.id)
-		// 		.then(item => publicArr.push(item));
-		// });
+		
+		const publicGs = await octokit.request('GET /gists/public',
+			{headers:{
+				Authorization: `token ${process.env.GITHUB_PAT}`
+			}});
+		publicGs.data.forEach(i => {
+			return collectGistInfo(i.id)
+				.then(item => publicArr.push(item));
+		});
 		console.log('publicArr:', publicArr);
 		setGists(publicArr);
 		return;

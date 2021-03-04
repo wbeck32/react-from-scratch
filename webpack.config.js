@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
+const {GenerateSW, InjectManifest} = require('workbox-webpack-plugin');
 
 module.exports = {
 	entry : './src/index.js',
@@ -40,5 +41,9 @@ module.exports = {
 		hotOnly : true,
 		https:true
 	},
-	plugins : [new webpack.HotModuleReplacementPlugin(), new Dotenv()]
+	plugins : [
+		new webpack.HotModuleReplacementPlugin(), 
+		new Dotenv(), 
+		new GenerateSW(),
+	]
 };

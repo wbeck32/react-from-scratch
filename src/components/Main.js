@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import GistList from './GistList';
 import GistDetail from './GistDetail';
 import {utilities} from '../utilities';
-import zIndex from '@material-ui/core/styles/zIndex';
 const {collectGistInfo} = utilities;
 
 const Main = props => {
