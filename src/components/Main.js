@@ -10,32 +10,18 @@ const Main = () => {
 	return (
 	
 		<Paper
-  container
-  direction="column"
-  justify="space-evenly"
-  alignItems="stretch"
-children={
-<>
-<section>section 1</section>
-<section>section 2</section>
-</>
-
-
-}
-
-/>
-
-
-
-
-	
-	
-	
-	
+			container
+			direction="column"
+			justify="space-evenly"
+			alignItems="stretch"
+			children={
+				<>
+					<section>section 1</section>
+					<section>section 2</section>
+				</>
+			}
+		/>
 	)
-
-
-
 }
 
 export default Main

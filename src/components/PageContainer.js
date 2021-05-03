@@ -9,7 +9,7 @@ const PageContainer = () => {
 		border: '2px solid pink'
 	}
 	return (
-	<div style={pageContainerStyle}><Header /><Main /><Footer /></div>
+		<div style={pageContainerStyle}><Header /><Main /><Footer /></div>
 	)
 
 }
