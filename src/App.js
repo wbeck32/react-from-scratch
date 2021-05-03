@@ -18,14 +18,16 @@ const App = () => {
 	const [message, setMessage] = useState('Choose an option from the menu on the left.');
 	
 	const publicGists = async () => {
-		console.log(1, 'publicGists');
+console.log(1, 'publicGists');
 		let publicArr = [];
-		
+	
 		const publicGs = await octokit.request('GET /gists/public',
-			{headers:{
+			{
+				headers:{
 				Authorization: `token ${process.env.GITHUB_PAT}`
 			}});
 		publicGs.data.forEach(i => {
+			console.log('i:', i);
 			return collectGistInfo(i.id)
 				.then(item => publicArr.push(item));
 		});
