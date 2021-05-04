@@ -25,59 +25,59 @@
 'use strict';
 
 let gulp = require('gulp'),
-  mocha = require('gulp-mocha'),
-  babel = require('gulp-babel'),
-  git = require('gulp-git'),
-  bump = require('gulp-bump'),
-  filter = require('gulp-filter'),
-  tagVersion = require('gulp-tag-version'),
-  sourcemaps = require('gulp-sourcemaps'),
-  plumber = require('gulp-plumber'),
-  source = require('vinyl-source-stream'),
-  browserify = require('browserify'),
-  lazypipe = require('lazypipe'),
-  eslint = require('gulp-eslint'),
-  fs = require('fs');
+	mocha = require('gulp-mocha'),
+	babel = require('gulp-babel'),
+	git = require('gulp-git'),
+	bump = require('gulp-bump'),
+	filter = require('gulp-filter'),
+	tagVersion = require('gulp-tag-version'),
+	sourcemaps = require('gulp-sourcemaps'),
+	plumber = require('gulp-plumber'),
+	source = require('vinyl-source-stream'),
+	browserify = require('browserify'),
+	lazypipe = require('lazypipe'),
+	eslint = require('gulp-eslint'),
+	fs = require('fs');
 
 require('babel-register')({
-  only : /escope\/(src|test)\//
+	only : /escope\/(src|test)\//
 });
 
 let TEST = ['test/*.js'];
 let SOURCE = ['src/**/*.js'];
 
 let ESLINT_OPTION = {
-  rules : {
-    'quotes' : 0,
-    'eqeqeq' : 0,
-    'no-use-before-define' : 0,
-    'no-shadow' : 0,
-    'no-new' : 0,
-    'no-underscore-dangle' : 0,
-    'no-multi-spaces' : 0,
-    'no-native-reassign' : 0,
-    'no-loop-func' : 0,
-    'no-lone-blocks' : 0
-  },
-  ecmaFeatures : {
-    jsx : false,
-    modules : true
-  },
-  env : {
-    node : true,
-    es6 : true
-  }
+	rules : {
+		'quotes' : 0,
+		'eqeqeq' : 0,
+		'no-use-before-define' : 0,
+		'no-shadow' : 0,
+		'no-new' : 0,
+		'no-underscore-dangle' : 0,
+		'no-multi-spaces' : 0,
+		'no-native-reassign' : 0,
+		'no-loop-func' : 0,
+		'no-lone-blocks' : 0
+	},
+	ecmaFeatures : {
+		jsx : false,
+		modules : true
+	},
+	env : {
+		node : true,
+		es6 : true
+	}
 };
 
 let BABEL_OPTIONS = JSON.parse(fs.readFileSync('.babelrc', {
- encoding : 'utf8' 
+	encoding : 'utf8' 
 }));
 
 let build = lazypipe()
-  .pipe(sourcemaps.init)
-  .pipe(babel, BABEL_OPTIONS)
-  .pipe(sourcemaps.write)
-  .pipe(gulp.dest, 'lib');
+	.pipe(sourcemaps.init)
+	.pipe(babel, BABEL_OPTIONS)
+	.pipe(sourcemaps.write)
+	.pipe(gulp.dest, 'lib');
 
 gulp.task('build-for-watch', () => {
 	return gulp.src(SOURCE).pipe(plumber()).pipe(build());
@@ -131,22 +131,22 @@ gulp.task('lint', () => {
  */
 
 function inc (importance) {
-  // get all the files to bump version in
-  return gulp.src(['./package.json'])
-  // bump the version number in those files
-    .pipe(bump({
- type : importance 
-}))
-  // save it back to filesystem
-    .pipe(gulp.dest('./'))
-  // commit the changed version number
-    .pipe(git.commit('Bumps package version'))
-  // read only one file to get the version number
-    .pipe(filter('package.json'))
-  // **tag it in the repository**
-    .pipe(tagVersion({
-      prefix : ''
-    }));
+	// get all the files to bump version in
+	return gulp.src(['./package.json'])
+	// bump the version number in those files
+		.pipe(bump({
+			type : importance 
+		}))
+	// save it back to filesystem
+		.pipe(gulp.dest('./'))
+	// commit the changed version number
+		.pipe(git.commit('Bumps package version'))
+	// read only one file to get the version number
+		.pipe(filter('package.json'))
+	// **tag it in the repository**
+		.pipe(tagVersion({
+			prefix : ''
+		}));
 }
 
 gulp.task('patch', ['build'], () => { return inc('patch'); });
